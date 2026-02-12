@@ -1,221 +1,526 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Will You Be My Valentine? 💕</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Will You Be My Valentine? 💕</title>
 
-<style>
-body {
-    margin: 0;
-    font-family: 'Segoe UI', cursive;
-    background: radial-gradient(circle at top, #ff85c1, #ff4da6, #b30059);
-    text-align: center;
-    overflow-x: hidden;
-    color: white;
-}
+  <!-- Soft cute fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;600;700&family=Dancing+Script:wght@500;600;700&display=swap" rel="stylesheet">
 
-/* Floating subtle shimmer */
-body::after {
-    content: "";
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle at 20% 30%, rgba(255,255,255,0.15), transparent 60%);
-    pointer-events: none;
-}
+  <style>
+    :root{
+      --pinkA:#ffe6f2;
+      --pinkB:#ffd1e8;
+      --pinkC:#ffb3d9;
+      --hot:#ff4da6;
+      --hot2:#ff1a8c;
+      --text:#7a1f4e;
+      --card: rgba(255,255,255,.72);
+      --card2: rgba(255,255,255,.55);
+      --shadow: rgba(50,0,25,.14);
+    }
 
-/* Main container */
-.container {
-    padding: 50px 20px 100px;
-}
+    *{ box-sizing: border-box; }
 
-h1 {
-    font-size: 3rem;
-    margin-bottom: 20px;
-    text-shadow: 0 0 20px #ff99cc;
-}
+    body{
+      margin:0;
+      min-height:100vh;
+      font-family: "Quicksand", system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      color: var(--text);
+      text-align:center;
+      overflow-x:hidden;
+      background:
+        radial-gradient(circle at 18% 12%, rgba(255,255,255,.75), transparent 40%),
+        radial-gradient(circle at 80% 30%, rgba(255,255,255,.55), transparent 45%),
+        linear-gradient(180deg, var(--pinkA), var(--pinkB), var(--pinkC));
+    }
 
-/* Photo styling */
-.photo {
-    display: flex;
-    justify-content: center;
-    margin: 30px 0;
-}
+    /* Subtle texture + tiny hearts pattern */
+    body::before{
+      content:"";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.30;
+      background-image:
+        radial-gradient(rgba(255,255,255,.55) 1px, transparent 1px),
+        radial-gradient(rgba(255,77,166,.12) 1px, transparent 1px);
+      background-size: 18px 18px, 26px 26px;
+      background-position: 0 0, 6px 10px;
+      filter: blur(.15px);
+      z-index: 0;
+    }
 
-.photo img {
-    width: 320px;
-    border-radius: 30px;
-    box-shadow: 0 0 40px #ff66b3;
-    filter: brightness(1.2) contrast(1.05);
-    transition: 0.4s ease;
-}
+    /* A few big soft blobs for depth */
+    .blobs{
+      position: fixed;
+      inset: 0;
+      pointer-events:none;
+      z-index: 0;
+      opacity: .85;
+      filter: blur(18px);
+      background:
+        radial-gradient(circle at 20% 30%, rgba(255,77,166,.16), transparent 45%),
+        radial-gradient(circle at 75% 20%, rgba(255,255,255,.55), transparent 50%),
+        radial-gradient(circle at 55% 80%, rgba(255,77,166,.10), transparent 55%);
+    }
 
-.photo img:hover {
-    transform: scale(1.03);
-}
+    .wrap{
+      position: relative;
+      z-index: 1;
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 52px 18px 110px;
+    }
 
-/* Message */
-.message {
-    font-size: 1.4rem;
-    margin-bottom: 40px;
-}
+    h1{
+      margin: 0 0 12px;
+      font-family: "Pacifico", cursive;
+      font-size: clamp(2.2rem, 4.2vw, 3.4rem);
+      color: #ff2d95;
+      text-shadow: 0 10px 26px rgba(255,77,166,.20);
+      animation: floaty 3.2s ease-in-out infinite;
+      letter-spacing: .2px;
+    }
 
-/* Button area */
-.button-area {
-    position: relative;
-    height: 200px;
-    max-width: 500px;
-    margin: auto;
-}
+    @keyframes floaty{
+      0%,100%{ transform: translateY(0); }
+      50%{ transform: translateY(-8px); }
+    }
 
-button {
-    padding: 14px 30px;
-    font-size: 1.2rem;
-    border-radius: 50px;
-    border: none;
-    cursor: pointer;
-    transition: 0.2s ease;
-}
+    .card{
+      margin: 18px auto 0;
+      width: min(760px, 95vw);
+      border-radius: 34px;
+      background: var(--card);
+      border: 1px solid rgba(255,255,255,.70);
+      box-shadow: 0 22px 70px var(--shadow);
+      backdrop-filter: blur(10px);
+      padding: 22px 18px 26px;
+      overflow: hidden;
+      position: relative;
+    }
 
-/* YES */
-#yesBtn {
-    background: #ff1a8c;
-    color: white;
-    position: absolute;
-    left: 35%;
-    top: 60%;
-}
+    /* gentle shine edge */
+    .card::after{
+      content:"";
+      position:absolute;
+      inset:-80px -120px auto auto;
+      width: 320px;
+      height: 320px;
+      background: radial-gradient(circle, rgba(255,255,255,.85), transparent 60%);
+      transform: rotate(18deg);
+      opacity: .35;
+      pointer-events:none;
+    }
 
-#yesBtn:hover {
-    background: #ff66b3;
-    transform: scale(1.1);
-}
+    .photo{
+      display:flex;
+      justify-content:center;
+      margin: 10px 0 10px;
+    }
 
-/* NO */
-#noBtn {
-    background: white;
-    color: #ff1a8c;
-    position: absolute;
-    left: 55%;
-    top: 60%;
-}
+    .photo img{
+      width: min(320px, 86vw);
+      border-radius: 28px;
+      box-shadow: 0 0 24px rgba(255,77,166,.30), 0 18px 44px rgba(50,0,25,.18);
+      filter: brightness(1.14) contrast(1.05) saturate(1.04);
+      transition: transform .35s ease;
+    }
+    .photo img:hover{ transform: scale(1.03); }
 
-/* Prompt bubble */
-.prompt {
-    position: fixed;
-    top: 15%;
-    left: 50%;
-    transform: translateX(-50%);
-    background: white;
-    color: #ff1a8c;
-    padding: 12px 18px;
-    border-radius: 20px;
-    opacity: 0;
-    transition: 0.3s ease;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-}
+    .prompt-line{
+      max-width: 680px;
+      margin: 12px auto 18px;
+      font-size: clamp(1.06rem, 2.1vw, 1.28rem);
+      line-height: 1.4;
+      color: #8a2c5a;
+      transition: opacity .35s ease, transform .35s ease;
+    }
 
-.prompt.show {
-    opacity: 1;
-}
+    .prompt-line.hide{
+      opacity: 0;
+      transform: translateY(-6px);
+      height: 0;
+      margin: 0 auto;
+      overflow: hidden;
+    }
 
-/* Hearts */
-.hearts {
-    position: fixed;
-    bottom: -50px;
-    font-size: 24px;
-    animation: rise 6s linear infinite;
-}
+    .button-area{
+      position: relative;
+      width: min(560px, 94vw);
+      height: 190px;
+      margin: 10px auto 0;
+      border-radius: 28px;
+      background: var(--card2);
+      border: 1px solid rgba(255,255,255,.60);
+      box-shadow: inset 0 0 0 2px rgba(255,255,255,.35);
+      overflow: hidden;
+    }
 
-@keyframes rise {
-    0% { transform: translateY(0); opacity: 1; }
-    100% { transform: translateY(-120vh); opacity: 0; }
-}
-</style>
+    .btn{
+      padding: 14px 28px;
+      font-size: 1.12rem;
+      border: none;
+      border-radius: 999px;
+      cursor: pointer;
+      user-select:none;
+      -webkit-tap-highlight-color: transparent;
+      transition: transform .18s ease, filter .18s ease, background .18s ease;
+      box-shadow: 0 14px 30px rgba(0,0,0,.12);
+      font-weight: 800;
+    }
+
+    #yesBtn{
+      position:absolute;
+      left:50%;
+      top:62%;
+      transform: translate(-112%, -50%);
+      background: linear-gradient(135deg, var(--hot), #ff78c2);
+      color: white;
+    }
+    #yesBtn:hover{ transform: translate(-112%, -50%) scale(1.06); }
+
+    #noBtn{
+      position:absolute;
+      left:50%;
+      top:62%;
+      transform: translate(12%, -50%);
+      background: rgba(255,255,255,.92);
+      color: var(--hot2);
+    }
+    #noBtn:hover{ transform: translate(12%, -50%) scale(1.06); }
+
+    /* Small toast prompt (for the NO button lines) */
+    .prompt{
+      position: fixed;
+      left: 50%;
+      top: 12%;
+      transform: translateX(-50%);
+      background: rgba(255,255,255,.92);
+      color: var(--hot2);
+      padding: 12px 16px;
+      border-radius: 18px;
+      box-shadow: 0 18px 50px rgba(0,0,0,.12);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .25s ease, transform .25s ease;
+      z-index: 9999;
+      font-weight: 800;
+      max-width: min(560px, 92vw);
+    }
+    .prompt.show{ opacity: 1; transform: translateX(-50%) translateY(0); }
+    .prompt.hide{ opacity: 0; transform: translateX(-50%) translateY(-8px); }
+
+    /* Letter section (hidden until YES) */
+    .letter-wrap{
+      max-width: 720px;
+      margin: 16px auto 0;
+      text-align: left;
+      border-radius: 26px;
+      background: rgba(255,255,255,.85);
+      border: 1px solid rgba(255,255,255,.75);
+      box-shadow: 0 18px 50px rgba(50,0,25,.12);
+      padding: 18px 16px;
+      opacity: 0;
+      transform: translateY(10px);
+      max-height: 0;
+      overflow: hidden;
+      transition: opacity .45s ease, transform .45s ease, max-height .55s ease;
+    }
+
+    .letter-wrap.show{
+      opacity: 1;
+      transform: translateY(0);
+      max-height: 1200px;
+    }
+
+    .letter-title{
+      font-family: "Pacifico", cursive;
+      font-size: 1.8rem;
+      color: #ff2d95;
+      margin: 2px 0 10px;
+    }
+
+    #letterText{
+      font-family: "Dancing Script", cursive;
+      font-size: clamp(1.25rem, 2.4vw, 1.75rem);
+      line-height: 1.36;
+      color: #8a2c5a;
+      white-space: pre-wrap;
+      min-height: 120px;
+    }
+
+    /* Tiny audio helper */
+    .audio-hint{
+      margin-top: 10px;
+      font-size: .95rem;
+      color: #8a2c5a;
+      opacity: .92;
+      display: none;
+    }
+    .audio-hint.show{ display: block; }
+
+    /* Hearts floating */
+    .hearts{
+      position: fixed;
+      bottom: -70px;
+      font-size: 24px;
+      animation: rise 6.2s linear infinite;
+      z-index: 0;
+      opacity: 0.85;
+      filter: drop-shadow(0 8px 12px rgba(0,0,0,.10));
+    }
+    @keyframes rise{
+      0%{ transform: translateY(0) scale(1); opacity: 1; }
+      100%{ transform: translateY(-120vh) scale(1.2); opacity: 0; }
+    }
+
+    /* Confetti bits */
+    .confetti{
+      position: fixed;
+      width: 10px;
+      height: 16px;
+      border-radius: 3px;
+      z-index: 9999;
+      pointer-events: none;
+      animation: confetti-fall 1.6s ease-out forwards;
+      opacity: .95;
+    }
+    @keyframes confetti-fall{
+      0%{ transform: translateY(-10px) rotate(0deg); opacity: 1; }
+      100%{ transform: translateY(110vh) rotate(720deg); opacity: 0; }
+    }
+
+    /* After YES: we can hide the button box gently */
+    .button-area.fade-out{
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity .45s ease, transform .45s ease;
+      height: 0;
+      margin: 0 auto;
+      overflow: hidden;
+      border: 0;
+    }
+  </style>
 </head>
 
 <body>
+  <div class="blobs"></div>
 
-<div class="container">
+  <div class="wrap">
     <h1>Will You Be My Valentine? 💕</h1>
 
-    <div class="photo">
-        <img src="image.jpg" alt="My Valentine">
-    </div>
+    <div class="card">
+      <div class="photo">
+        <img src="image.jpg" alt="My Valentine" />
+      </div>
 
-    <div class="message">
-        You make my world softer, warmer, and brighter.  
-        So tell me… will you be my Valentine? 💖
-    </div>
+      <div class="prompt-line" id="promptLine">
+        You make my world softer, warmer, and brighter. So tell me… will you be my Valentine? 💗
+      </div>
 
-    <div class="button-area" id="buttonArea">
-        <button id="yesBtn">Yes 💗</button>
-        <button id="noBtn">No 🙄</button>
-    </div>
-</div>
+      <div class="button-area" id="buttonArea">
+        <button class="btn" id="yesBtn">Yes 💗</button>
+        <button class="btn" id="noBtn">No 🙄</button>
+      </div>
 
-<div class="prompt" id="promptBubble"></div>
+      <div class="letter-wrap" id="letterWrap">
+        <div class="letter-title">For my little princess 💘</div>
+        <div id="letterText"></div>
+        <div class="audio-hint" id="audioHint">
+          If the music didn’t start, tap anywhere once and it’ll play 💞
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="prompt" id="promptBubble"></div>
+
+  <!-- Audio (must be in same folder as index.html) -->
+  <audio id="song" preload="auto">
+    <source src="photograph.mp3" type="audio/mpeg">
+  </audio>
 
 <script>
-/* Floating hearts */
-function createHeart() {
-    const heart = document.createElement("div");
-    heart.classList.add("hearts");
-    heart.innerHTML = "💖";
-    heart.style.left = Math.random() * 100 + "vw";
-    heart.style.animationDuration = (3 + Math.random() * 3) + "s";
-    document.body.appendChild(heart);
-    setTimeout(() => heart.remove(), 6000);
-}
-setInterval(createHeart, 500);
+  // Hearts background
+  function createHeart(){
+    const h = document.createElement("div");
+    h.className = "hearts";
+    const emojis = ["💖","💕","💘","💗","💞","💓","✨"];
+    h.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+    h.style.left = Math.random()*100 + "vw";
+    h.style.animationDuration = (3.5 + Math.random()*3.2) + "s";
+    h.style.fontSize = (18 + Math.random()*18) + "px";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(), 7000);
+  }
+  setInterval(createHeart, 520);
 
-/* Valentine Logic */
-const noBtn = document.getElementById("noBtn");
-const yesBtn = document.getElementById("yesBtn");
-const area = document.getElementById("buttonArea");
-const promptBubble = document.getElementById("promptBubble");
+  // Prompt bubble for NO messages
+  const promptBubble = document.getElementById("promptBubble");
+  let promptTimeout;
+  function showPrompt(text){
+    clearTimeout(promptTimeout);
+    promptBubble.textContent = text;
+    promptBubble.classList.remove("hide");
+    promptBubble.classList.add("show");
+    promptTimeout = setTimeout(()=>{
+      promptBubble.classList.remove("show");
+      promptBubble.classList.add("hide");
+    }, 1400);
+  }
 
-const prompts = [
+  // No button runs away
+  const noBtn = document.getElementById("noBtn");
+  const yesBtn = document.getElementById("yesBtn");
+  const area = document.getElementById("buttonArea");
+
+  const noPrompts = [
     "you cant get rid of me!",
     "nice try baby",
     "baby cmon now.. do you not love me anymore?"
-];
+  ];
 
-let noCount = 0;
-let timeout;
+  let noCount = 0;
 
-function showPrompt(text) {
-    clearTimeout(timeout);
-    promptBubble.textContent = text;
-    promptBubble.classList.add("show");
-    timeout = setTimeout(() => {
-        promptBubble.classList.remove("show");
-    }, 1500);
-}
+  function moveNoButton(){
+    const areaRect = area.getBoundingClientRect();
+    const btnRect = noBtn.getBoundingClientRect();
+    const pad = 12;
 
-function moveButton() {
-    const maxX = area.clientWidth - noBtn.clientWidth;
-    const maxY = area.clientHeight - noBtn.clientHeight;
-    noBtn.style.left = Math.random() * maxX + "px";
-    noBtn.style.top = Math.random() * maxY + "px";
-}
+    const maxX = areaRect.width - btnRect.width - pad;
+    const maxY = areaRect.height - btnRect.height - pad;
 
-noBtn.addEventListener("click", () => {
+    const x = Math.max(pad, Math.floor(Math.random() * Math.max(maxX, pad)));
+    const y = Math.max(pad, Math.floor(Math.random() * Math.max(maxY, pad)));
+
+    noBtn.style.left = x + "px";
+    noBtn.style.top  = y + "px";
+    noBtn.style.transform = "translate(0,0)";
+  }
+
+  window.addEventListener("load", ()=> setTimeout(moveNoButton, 220));
+
+  noBtn.addEventListener("click", ()=>{
     noCount++;
-    showPrompt(prompts[Math.min(noCount - 1, 2)]);
-    if (noCount < 3) {
-        moveButton();
+    showPrompt(noPrompts[Math.min(noCount-1, noPrompts.length-1)]);
+
+    if(noCount < 3){
+      moveNoButton();
     } else {
-        noBtn.style.display = "none";
-        showPrompt("okay fine… you only have one choice now 😌💗");
+      noBtn.style.display = "none";
+      showPrompt("okay fine… you only have one choice now 😌💗");
+      yesBtn.style.left = "50%";
+      yesBtn.style.top = "62%";
+      yesBtn.style.transform = "translate(-50%, -50%) scale(1.06)";
     }
-});
+  });
 
-yesBtn.addEventListener("click", () => {
-    alert("You just made me the happiest man alive 💘");
-});
+  // Confetti
+  function confettiBurst(){
+    for(let i=0;i<65;i++){
+      const c = document.createElement("div");
+      c.className = "confetti";
+      const shades = ["#ff4da6","#ff1a8c","#ff77b7","#ffd1e8","#ffffff"];
+      c.style.background = shades[Math.floor(Math.random()*shades.length)];
+      c.style.left = Math.random()*100 + "vw";
+      c.style.top = (-10 - Math.random()*30) + "px";
+      c.style.transform = `rotate(${Math.random()*360}deg)`;
+      c.style.animationDuration = (1.2 + Math.random()*1.0) + "s";
+      document.body.appendChild(c);
+      setTimeout(()=>c.remove(), 1700);
+    }
+  }
+
+  // Letter text (punctuation cleaned + extra cute lines)
+  const letter =
+`Alo my little princess… did you really think I forgot Valentine’s?
+
+My love, I could never forget a holiday where I get to show you how much love and gratitude I have for you, my baby. You mean the world to me — of course I’d do the best I can. And honestly… you’re my favorite part of every day, even when we’re far.
+
+Oh my little baby, I hope you aren’t disappointed with what I managed to do for us. I tried to make something that feels like you: soft, sweet, and pretty — and the kind of love that’s impossible to ignore.
+
+I love you so damn much — more than anything in this dunya — to the point where I’m willing to do anything for us. This love is something I can’t fully put into words or capture in a photo… I can only show it to you when I finally get to see you in person for the first time.
+
+That vacation we’ll have together — creating memories, seeing what life together feels like, stress-free and full of love — is something I can only imagine right now… until we both make it real.
+
+And just so you know: you’re always my Valentine. Today, tomorrow, and every version of “forever” that exists.
+
+I love you, my baby. I hope this brings a smile to your little cute face after that annoying training. 💗`;
+
+  const promptLine = document.getElementById("promptLine");
+  const letterWrap = document.getElementById("letterWrap");
+  const letterTextEl = document.getElementById("letterText");
+  const audioHint = document.getElementById("audioHint");
+  const song = document.getElementById("song");
+
+  // Typewriter
+  let typingTimer;
+  function typeLetter(text){
+    clearInterval(typingTimer);
+    letterTextEl.textContent = "";
+    let i = 0;
+    const speed = 14; // lower = faster
+    typingTimer = setInterval(()=>{
+      letterTextEl.textContent += text[i] || "";
+      i++;
+      if(i >= text.length) clearInterval(typingTimer);
+    }, speed);
+  }
+
+  async function startSong(){
+    try{
+      song.currentTime = 0;
+      song.volume = 0.05;
+      await song.play();
+
+      // smooth fade in
+      let v = 0.05;
+      const fade = setInterval(()=>{
+        v += 0.03;
+        song.volume = Math.min(v, 0.45);
+        if(v >= 0.45) clearInterval(fade);
+      }, 90);
+
+      audioHint.classList.remove("show");
+    } catch (e){
+      // If blocked, show hint so she can tap once
+      audioHint.classList.add("show");
+      console.log("Audio play blocked:", e);
+    }
+  }
+
+  // YES: remove small text, transition in letter, type it, start music
+  yesBtn.addEventListener("click", async ()=>{
+    confettiBurst();
+    showPrompt("YAYYYYY 💘");
+
+    // hide the small line
+    promptLine.classList.add("hide");
+
+    // hide buttons area (optional: makes the letter the focus)
+    area.classList.add("fade-out");
+
+    // show letter
+    setTimeout(()=>{
+      letterWrap.classList.add("show");
+      typeLetter(letter);
+    }, 350);
+
+    // start the song
+    await startSong();
+  });
+
+  // Fallback: if music didn’t start, tapping anywhere tries again
+  document.addEventListener("click", ()=>{
+    if(audioHint.classList.contains("show")){
+      startSong();
+    }
+  }, { passive:true });
 </script>
-
 </body>
 </html>
